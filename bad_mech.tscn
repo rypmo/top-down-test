@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbpsw0otgvg26"]
+
+[ext_resource type="Script" path="res://bad_mech.gd" id="1_ahrgx"]
+[ext_resource type="Texture2D" uid="uid://7qqqcwan0c3h" path="res://e0_spriteSheet.png" id="1_tvtfo"]
+[ext_resource type="Texture2D" uid="uid://dgn7ndf0r3xc6" path="res://e0_dead.png" id="2_6invc"]
+[ext_resource type="AudioStream" uid="uid://ca8aknrub12rp" path="res://death_test.wav" id="3_h0njw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ho1dd"]
+
+[node name="BadMech" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_ahrgx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -10)
+shape = SubResource("CircleShape2D_ho1dd")
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="Alive" type="Sprite2D" parent="Graphics"]
+position = Vector2(-0.999996, -10)
+scale = Vector2(0.851563, 0.851563)
+texture = ExtResource("1_tvtfo")
+hframes = 2
+
+[node name="Dead" type="Sprite2D" parent="Graphics"]
+visible = false
+z_index = -1
+position = Vector2(0, 2)
+texture = ExtResource("2_6invc")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, -24)
+collision_mask = 3
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_h0njw")
